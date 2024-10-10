@@ -1,0 +1,85 @@
+문제 1: employees 테이블에서 모든 데이터를 조회하는 쿼리를 작성하세요. -> select * from employees;
+
+문제 2: employees 테이블에서 name과 department 컬럼만 조회하는 쿼리를 작성하세요. -> select name, department from employees;
+
+문제 3: 급여가 60,000 이상인 직원을 조회하는 쿼리를 작성하세요. -> select * from employees where salary >= 60000;
+
+문제 4: employees 테이블에서 급여가 높은 순서로 직원의 이름과 급여를 조회하는 쿼리를 작성하세요.
+  -> select name, salary
+     from employees
+     order by salary desc;
+
+문제 5: 급여가 높은 상위 3명의 직원만 조회하는 쿼리를 작성하세요.
+  -> select *
+     from employees
+     order by salary desc limit 3;
+
+문제 6: employees 테이블에서 직원의 총 수를 계산하는 쿼리를 작성하세요.
+  -> select count(*)
+     from employees;
+
+문제 7: employees 테이블에서 각 부서별 평균 급여를 조회하는 쿼리를 작성하세요.
+  -> select position as 부서, avg(salary) as 평균급여
+     from employees
+     group by position;
+
+문제 8: 평균 급여가 70,000 이상인 부서만 조회하는 쿼리를 작성하세요.
+  -> select position as 부서
+     from employees
+     group by position
+     having avg(salary) >= 70000;
+
+문제 9: 급여가 가장 높은 직원의 이름과 급여를 조회하는 쿼리를 작성하세요.
+  -> select name, salary
+     from employees
+     where salary = (select max(salary) from employees);
+
+문제 10: employees 테이블에서 중복되지 않은 department(부서)를 조회하는 쿼리를 작성하세요.
+  -> select distinct position
+     from employees;
+
+문제 11: employees 테이블에 새로운 직원을 추가하는 쿼리를 작성하세요. 이름은 'Soojin Kim', 부서는 'HR', 급여는 75000입니다.
+  -> insert into employees(name, position, salary) values('Soojin Kim', 'HR', 75000);
+
+문제 12: employees 테이블에 두 명의 직원을 추가하는 쿼리를 작성하세요.
+  이름: 'Jihyun Lee', 부서: 'Marketing', 급여: 65000
+  이름: 'Minho Park', 부서: 'Sales', 급여: 70000
+
+  -> insert into employees(name, position, salary) values
+     ('Jihyun Lee', 'Marketing', 65000),
+     ('Minho Park', 'Sales', 70000);
+
+문제 13: employees_archive 테이블에 Sales 부서에서 일하는 모든 직원을 복사하는 쿼리를 작성하세요.
+  -> insert into employees_archive(name, position, salary)
+     select(name, position, salary) from employees where position = 'Sales';
+
+문제 14: employees 테이블에서 'Jihyun Lee'의 급여를 68000으로 수정하는 쿼리를 작성하세요.
+  -> update employees 
+     set salary = 68000 
+     where name = 'Jihyun Lee';
+
+문제 15: 'Minho Park'의 부서를 'HR'로 바꾸고, 급여를 72000으로 수정하는 쿼리를 작성하세요.
+  -> update employees
+     set position = 'HR', salary = 72000
+     where name = 'Minho Park';
+
+문제 16: Sales 부서에 속한 모든 직원의 급여를 5% 인상하는 쿼리를 작성하세요.
+  ->  update employees set salary = salary * 1.05;
+
+문제 17: employees 테이블에서 'Soojin Kim'의 데이터를 삭제하는 쿼리를 작성하세요.
+  -> delete from employees where name = 'Soojin Kim';
+
+문제 18: 급여가 50,000 미만인 모든 직원을 삭제하는 쿼리를 작성하세요.
+  -> delete from employees where salary < 50000;
+
+문제 19: employees와 departments 테이블을 INNER JOIN하여 직원의 이름과 해당 부서명을 조회하는 쿼리를 작성하세요.
+  -> select e.name, d.position
+     from employees e
+     inner join departments d
+     on e.position = d.position;
+
+문제 20: employees 테이블에 속한 모든 직원의 이름과, 프로젝트가 있는 경우 해당 프로젝트 이름을 조회하는 쿼리를 작성하세요. 프로젝트가 없는 직원도 포함되도록 하세요.
+  -> select e.name p.project_name
+     from employees e
+     left join project p
+     on e.employee_id = p.employee_id; 
